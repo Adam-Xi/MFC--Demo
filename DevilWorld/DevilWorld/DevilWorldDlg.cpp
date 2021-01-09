@@ -266,7 +266,7 @@ void CDevilWorldDlg::OnOperateTransparent3()
 void CDevilWorldDlg::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-
+	/*
 	m_myRole.SetSpeedX(0);
 	m_myRole.SetSpeedY(0);
 
@@ -300,6 +300,7 @@ void CDevilWorldDlg::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	// 绘制角色
 //	PaintRole(m_nPosX, m_nPosY);
 
+*/
 	CDialogEx::OnKeyDown(nChar, nRepCnt, nFlags);
 }
 
@@ -446,6 +447,8 @@ void CDevilWorldDlg::PaintRollingRole(HDC hDC, int iRolePosX, int iRolePosY)
 
 void CDevilWorldDlg::Update()
 {
+	KeyDown();
+
 	// 预判断 是否碰撞
 	BOOL bCollision = FALSE;
 	int nX = m_myRole.GetPosX() + m_myRole.GetSpeedX();
@@ -555,10 +558,15 @@ void CDevilWorldDlg::PainWall(HDC hDC)
 	HBITMAP hTmpBmp = (HBITMAP)::SelectObject(hBufDC, hBmp);
 
 	// 绘制
-	//::BitBlt()
+	// BLENDFUNCTION ftn = { 0 };
+	// ftn.BlendOp = 0;
+	// ftn.BlendFlags = 0;
+	// ftn.SourceConstantAlpha = 128;
+	// ftn.AlphaFormat = 0;
 	for (int i = 0; i < WALL_NUM; i++)
 	{
 		::TransparentBlt(hDC, m_rcWall[i].left, m_rcWall[i].top, WALL_WIDTH, WALL_HEIGHT, hBufDC, 0, 0, WALL_WIDTH, WALL_HEIGHT, RGB(255, 255, 255));
+		// ::AlphaBlend(hDC, m_rcWall[i].left, m_rcWall[i].top, WALL_WIDTH, WALL_HEIGHT, hBufDC, 0, 0, WALL_WIDTH, WALL_HEIGHT, ftn);
 	}
 
 	::SelectObject(hBufDC, hTmpBmp);
@@ -636,4 +644,40 @@ BOOL CDevilWorldDlg::IsCollision(RECT rcRole, RECT rcWall)
 		return TRUE;
 	}
 	return FALSE;
+}
+
+void CDevilWorldDlg::KeyDown()
+{
+	m_myRole.SetSpeedX(0);
+	m_myRole.SetSpeedY(0);
+
+	if (0 != (0x8000 & (::GetAsyncKeyState('W'))))
+	{
+		//		m_nPosY -= 10;
+		m_myRole.SetSpeedY(-5);
+		m_myRole.SetDirection(3);
+	}
+	else if (0 != (0x8000 & (::GetAsyncKeyState('S'))))
+	{
+		//		m_nPosY += 10;
+		m_myRole.SetSpeedY(5);
+		m_myRole.SetDirection(0);
+	}
+	else if (0 != (0x8000 & (::GetAsyncKeyState('A'))))
+	{
+		//		m_nPosX -= 10;
+		m_myRole.SetSpeedX(-5);
+		m_myRole.SetDirection(1);
+	}
+	else if (0 != (0x8000 & (::GetAsyncKeyState('D'))))
+	{
+		//		m_nPosX += 10;
+		m_myRole.SetSpeedX(5);
+		m_myRole.SetDirection(2);
+	}
+
+	// 绘制背景
+//	PaintBG(0, 0);
+	// 绘制角色
+//	PaintRole(m_nPosX, m_nPosY);
 }

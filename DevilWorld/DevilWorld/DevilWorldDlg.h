@@ -81,6 +81,8 @@ public:
 	// 碰撞检测
 	BOOL IsCollision(RECT rcRole, RECT rcWall);
 
+	void KeyDown();
+
 private:
 	CMyRole m_myRole;
 
