@@ -5,6 +5,28 @@
 #pragma once
 #include "MyRole.h"
 
+#define GAME_WIDTH 778
+#define GAME_HEIGHT 640
+
+#define MAP_WIDTH 2500
+#define MAP_HEIGHT 640
+
+#define SNOW_NUM 100
+
+#define WALL_NUM 3
+#define WALL_WIDTH 160
+#define WALL_HEIGHT 200
+
+// 粒子系统（雪花）数据结构
+typedef struct _SNOW
+{
+	int x;
+	int y;
+	int type;
+	BOOL exist;
+}SNOW;
+
+
 // CDevilWorldDlg 对话框
 class CDevilWorldDlg : public CDialogEx
 {
@@ -44,13 +66,29 @@ public:
 	void Init();
 
 	void PaintBG(int x, int y); // 显示背景
+	void PaintBG(HDC hDC, int x, int y); // 显示背景
 	void PaintRole(int x, int y); // 显示角色
+
+	void PaintRollingBG(HDC hDC, int iRolePosX, int iRolePosY);
+	void PaintRollingRole(HDC hDC, int x, int y);
 
 	void Update();
 	void Paint();
 
+	void PaintSnow(HDC hDC);
+	void PainWall(HDC hDC);
+
+	// 碰撞检测
+	BOOL IsCollision(RECT rcRole, RECT rcWall);
+
 private:
 	CMyRole m_myRole;
+
+	// 雪花
+	SNOW m_Snow[SNOW_NUM];
+	// 墙
+	RECT m_rcWall[3];
+
 private:
 	int m_nPosX;
 	int m_nPosY;

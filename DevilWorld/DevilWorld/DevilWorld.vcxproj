@@ -38,8 +38,8 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -215,6 +215,9 @@
   <ItemGroup>
     <Image Include="res\1.bmp" />
     <Image Include="res\2.bmp" />
+    <Image Include="res\3.bmp" />
+    <Image Include="res\5.bmp" />
+    <Image Include="res\6.bmp" />
     <Image Include="res\background.bmp" />
     <Image Include="res\devil.ico" />
     <Image Include="res\DevilWorld.ico" />

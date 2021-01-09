@@ -16,8 +16,15 @@ public:
 
 	int GetPosX() { return m_iPosX; }
 	int GetPosY() { return m_iPosY; }
+
+	int GetFrameWidth() { return m_iPerFrameWidth * 2; }
+	int GetFrameHeight() { return m_iPerFrameHeight * 2; }
+
 	void SetSpeedX(int iSpeedX) { m_iSpeedX = iSpeedX; }
 	void SetSpeedY(int iSpeedY) { m_iSpeedY = iSpeedY; }
+	int GetSpeedX() { return m_iSpeedX; }
+	int GetSpeedY() { return m_iSpeedY; }
+
 	void SetDirection(int iDirection) { m_iDirection = iDirection; }
 
 

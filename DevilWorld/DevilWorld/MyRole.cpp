@@ -21,7 +21,7 @@ void CMyRole::Init(UINT uiID, int iperFrameWidth, int iperFrameHeight, int iFram
 	m_iSpeedX = 0;
 	m_iSpeedY = 0;
 	m_iCurFrame = 0;
-	m_iDirection = 1; // 方向：从向下开始
+	m_iDirection = 0; // 方向：从向下开始
 }
 
 void CMyRole::Update()
@@ -39,10 +39,10 @@ void CMyRole::Draw(HDC hDC, int x, int y)
 	// ::BitBlt(hDC, x, y, m_iPerFrameWidth, m_iPerFrameHeight, hBufDC, \
 		m_iDirection * m_iPerFrameWidth, m_iCurFrame * m_iPerFrameHeight, SRCPAINT);
 
-	::BitBlt(hDC, x, y, 52, 62, hBufDC, 0, 0, SRCAND);
-	::BitBlt(hDC, x, y, 52, 62, hBufDC, 0, 63, SRCPAINT);
+	::TransparentBlt(hDC, x, y, m_iPerFrameWidth * 2, m_iPerFrameHeight * 2, hBufDC, \
+		m_iCurFrame * m_iPerFrameWidth, m_iDirection * m_iPerFrameHeight, m_iPerFrameWidth, m_iPerFrameHeight, RGB(255, 255, 255)); // 指定过滤颜色对背景进行过滤
 
-	// m_iCurFrame = (m_iCurFrame + 1) % m_iFrameNum;
+	m_iCurFrame = (m_iCurFrame + 1) % m_iFrameNum;
 
 	::DeleteDC(hBufDC);
 }

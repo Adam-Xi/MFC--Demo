@@ -80,5 +80,14 @@
     <Image Include="res\background.bmp">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="res\3.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\5.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\6.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>
